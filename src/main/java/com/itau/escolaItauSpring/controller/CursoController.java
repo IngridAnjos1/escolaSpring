@@ -4,6 +4,8 @@ import com.itau.escolaItauSpring.dto.request.CursoRequest;
 import com.itau.escolaItauSpring.dto.response.CursoResponse;
 import com.itau.escolaItauSpring.service.CursoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -42,6 +44,15 @@ public class CursoController {
     public ResponseEntity<Void> remover(@PathVariable UUID id) {
         service.remover(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<CursoResponse>> listar(@RequestParam String nome,
+                                                      @RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        List<CursoResponse> cursos = service.buscarPorNome(nome, pageable);
+        return ResponseEntity.ok(cursos);
     }
 
 }

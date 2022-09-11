@@ -7,7 +7,8 @@ import com.itau.escolaItauSpring.mapper.CursoMapper;
 import com.itau.escolaItauSpring.model.Curso;
 import com.itau.escolaItauSpring.repository.CursoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,7 +46,11 @@ public class CursoService {
 
     }
 
+    public List<CursoResponse> buscarPorNome(String nome, Pageable pageable) {
+        Page<Curso> cursos = repository.findByNome(nome, pageable);
+        return mapper.toResponseList(cursos.getContent());
+
+    }
 }
 
 
-//1 isso que está no controller são metodos ou construtores?
