@@ -41,7 +41,7 @@ public class CursoService {
         repository.delete(curso);
     }
 
-    private Curso findById(UUID id){
+    public Curso findById(UUID id){
         return repository.findById(id).orElseThrow(ItemNaoExistenteException ::new);
 
     }

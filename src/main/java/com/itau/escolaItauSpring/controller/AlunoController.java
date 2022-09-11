@@ -68,4 +68,10 @@ public class AlunoController {
         return ResponseEntity.ok(alunoResponse);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable UUID id) {
+        alunoService.remover(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

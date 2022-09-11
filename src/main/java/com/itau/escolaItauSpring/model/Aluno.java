@@ -1,24 +1,31 @@
 package com.itau.escolaItauSpring.model;
 
 
+
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
+@Audited
 public class Aluno {
     @Id
     @GeneratedValue
     @Type(type="org.hibernate.type.UUIDCharType")
+
     private UUID id;
 
-    // TODO mostrar na próxima aula como é criado
+
     @Column(nullable = false, length = 200)
     private String nome;
     private LocalDate dataNascimento;

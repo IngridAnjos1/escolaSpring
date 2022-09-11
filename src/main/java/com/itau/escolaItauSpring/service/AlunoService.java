@@ -38,6 +38,11 @@ public class AlunoService {
         return mapper.toResponse(aluno);
     }
 
+    public void remover(UUID id) {
+        this.buscarPorId(id);
+        repository.deleteById(id);
+    }
+
     }
 
 
